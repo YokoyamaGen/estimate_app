@@ -1,0 +1,53 @@
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="table-light">
+      <tr>
+        <th data-controller="sort" data-action="click->sort#toggle" data-sort-column-value="name" style="cursor: pointer;">
+          ドキュメント名
+          <i class="fas fa-sort"></i>
+        </th>
+        <th data-controller="sort" data-action="click->sort#toggle" data-sort-column-value="client" style="cursor: pointer;">
+          取引先
+          <i class="fas fa-sort"></i>
+        </th>
+        <th data-controller="sort" data-action="click->sort#toggle" data-sort-column-value="project" style="cursor: pointer;">
+          案件
+          <i class="fas fa-sort"></i>
+        </th>
+        <th data-controller="sort" data-action="click->sort#toggle" data-sort-column-value="amount" style="cursor: pointer;">
+          金額
+          <i class="fas fa-sort"></i>
+        </th>
+        <th data-controller="sort" data-action="click->sort#toggle" data-sort-column-value="transaction_date" style="cursor: pointer;">
+          取引日
+          <i class="fas fa-sort"></i>
+        </th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% documents.each do |document| %>
+        <tr>
+          <td><%= document.name %></td>
+          <td><%= document.client %></td>
+          <td><%= document.project %></td>
+          <td><%= number_to_currency(document.amount, unit: "¥", precision: 0) if document.amount %></td>
+          <td><%= document.transaction_date.strftime("%Y/%m/%d") if document.transaction_date %></td>
+          <td>
+            <button type="button" class="btn btn-sm btn-primary" onclick="selectDocument(<%= document.id %>, '<%= document.name %>')">
+              選択
+            </button>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+function selectDocument(id, name) {
+  console.log('Selected document:', id, name);
+  const modal = bootstrap.Modal.getInstance(document.getElementById('documentsModal'));
+  modal.hide();
+}
+</script>

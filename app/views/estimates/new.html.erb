@@ -1,0 +1,53 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>新規見積書作成</h2>
+      
+      <%= form_with(model: @estimate, local: true, class: "row g-3") do |form| %>
+        <% if @estimate.errors.any? %>
+          <div class="alert alert-danger">
+            <h4><%= pluralize(@estimate.errors.count, "error") %> prohibited this estimate from being saved:</h4>
+            <ul>
+              <% @estimate.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="col-md-6">
+          <%= form.label :title, "タイトル", class: "form-label" %>
+          <%= form.text_field :title, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :client, "取引先", class: "form-label" %>
+          <%= form.text_field :client, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :amount, "金額", class: "form-label" %>
+          <%= form.number_field :amount, step: :any, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :status, "ステータス", class: "form-label" %>
+          <%= form.select :status, options_for_select([['下書き', 'draft'], ['送信済み', 'sent'], ['承認済み', 'approved'], ['却下', 'rejected']], @estimate.status), { prompt: '選択してください' }, { class: "form-select" } %>
+        </div>
+
+        <div class="col-12">
+          <button type="button" class="btn btn-outline-primary" data-controller="modal" data-action="click->modal#open" data-modal-url-value="<%= modal_index_documents_path %>">
+            ドキュメントを選択
+          </button>
+        </div>
+
+        <div class="col-12">
+          <%= form.submit "見積書を作成", class: "btn btn-primary" %>
+          <%= link_to "戻る", estimates_path, class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="modal-container"></div>

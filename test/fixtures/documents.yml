@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  amount: 9.99
+  client: MyString
+  project: MyString
+  transaction_date: 2025-06-22
+  file_path: MyString
+
+two:
+  name: MyString
+  amount: 9.99
+  client: MyString
+  project: MyString
+  transaction_date: 2025-06-22
+  file_path: MyString

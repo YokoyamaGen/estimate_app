@@ -1,0 +1,32 @@
+<div class="modal fade" id="documentsModal" tabindex="-1" aria-labelledby="documentsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="documentsModalLabel">ドキュメント選択</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <%= form_with url: modal_index_documents_path, method: :get, 
+                        data: { controller: "search" }, 
+                        class: "d-flex" do |form| %>
+            <%= form.text_field :search, placeholder: "ドキュメント名で検索...", 
+                                value: params[:search], 
+                                class: "form-control me-2",
+                                data: { 
+                                  search_target: "input",
+                                  action: "input->search#perform"
+                                } %>
+          <% end %>
+        </div>
+        
+        <turbo-frame id="documents-list">
+          <%= render "documents/list", documents: @documents %>
+        </turbo-frame>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>

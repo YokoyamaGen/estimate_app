@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>新規ドキュメント登録</h2>
+      
+      <%= form_with(model: @document, local: true, class: "row g-3") do |form| %>
+        <% if @document.errors.any? %>
+          <div class="alert alert-danger">
+            <h4><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h4>
+            <ul>
+              <% @document.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="col-md-6">
+          <%= form.label :name, "ドキュメント名", class: "form-label" %>
+          <%= form.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :client, "取引先", class: "form-label" %>
+          <%= form.text_field :client, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :project, "案件", class: "form-label" %>
+          <%= form.text_field :project, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :amount, "金額", class: "form-label" %>
+          <%= form.number_field :amount, step: :any, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :transaction_date, "取引日", class: "form-label" %>
+          <%= form.date_field :transaction_date, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :pdf_file, "PDFファイル", class: "form-label" %>
+          <%= form.file_field :pdf_file, accept: ".pdf", class: "form-control" %>
+        </div>
+
+        <div class="col-12">
+          <%= form.submit "ドキュメントを登録", class: "btn btn-primary" %>
+          <%= link_to "戻る", documents_path, class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
